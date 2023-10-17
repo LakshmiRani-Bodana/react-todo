@@ -1,14 +1,12 @@
 import React, { useState } from "react";
+import "./Todo.css";
 
 function Todo() {
-  const [list, setList] = useState([
-    { id: 1, text: "clean the house" },
-    { id: 2, text: "buy milk" },
-  ]);
+  const [list, setList] = useState([]);
   const [toDo, setToDo] = useState("");
 
   const generateId = () => {
-    if (list && list.length > 1) {
+    if (list && list.length > 0) {
       return Math.max(...list.map((t) => t.id)) + 1;
     } else {
       return 1;
@@ -22,41 +20,66 @@ function Todo() {
       return;
     }
     const newId = generateId();
-    const newToDo = { id: newId, text: toDo };
+    const newToDo = { id: newId, text: toDo, completed: false };
     setList([...list, newToDo]);
     setToDo("");
   };
+
   const handleInput = (e) => {
     setToDo(e.target.value);
   };
 
+  const Completed = (id) => {
+    const yourNextList = [...list];
+    var newList = list.filter((item) => item.id == id);
+    newList[0].completed = true;
+    setList(yourNextList);
+  };
   const deleteItem = (id) => {
     setList(list.filter((item) => item.id !== id));
   };
+
   return (
     <div className="ToDo">
-      <h1 className="ToDo-Header">React To Do</h1>
+      <h1 className="ToDo-Header">ToDo List</h1>
+      <div className="ToDoInput">
+        <input
+          type="text"
+          value={toDo}
+          onChange={handleInput}
+          placeholder="Enter new task"
+        />
+        <button className="ToDo-Add" onClick={createNewToDoItem}>
+          Add
+        </button>
+      </div>
       <div className="ToDo-Container">
         <div className="ToDo-Content">
           {list.map((item) => {
-            <div className="ToDoItem">
-              <p className="ToDoItem-Text">{item.text}</p>
-              <button
-                className="ToDoItem-Delete"
-                onClick={() => deleteItem(item.id)}
-              >
-                -
-              </button>
-            </div>;
-            //   return <ToDoItem key={item.id} item={item} deleteItem={deleteItem} />;
+            return (
+              <div className="ToDoItem">
+                <p
+                  className={
+                    item.completed ? "ToDoItem-Text checked" : "ToDoItem-Text"
+                  }
+                >
+                  {item.text}
+                </p>
+                <button
+                  className="ToDoItem-Delete"
+                  onClick={() => Completed(item.id)}
+                >
+                  completed
+                </button>
+                <button
+                  className="ToDoItem-Delete"
+                  onClick={() => deleteItem(item.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            );
           })}
-        </div>
-
-        <div className="ToDoInput">
-          <input type="text" value={toDo} onChange={handleInput} />
-          <button className="ToDo-Add" onClick={createNewToDoItem}>
-            +
-          </button>
         </div>
       </div>
     </div>
