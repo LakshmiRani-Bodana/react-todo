@@ -19,9 +19,12 @@
   color: black;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica,
     Arial, sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   text-transform: uppercase;
   margin: 70px auto 30px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to top, #cfb0d3, #3c75aa6e);
 }
 
 .ToDo-Subheader {
@@ -46,9 +49,9 @@
   /* justify-content: center; */
   align-items: center;
   cursor: pointer;
-  background: #73ff73;
+  background: linear-gradient(to top, #cfb0d3, #3c75aa6e);
   border-radius: 5px;
-  box-shadow: 1px 1px 6px #47a947;
+  box-shadow: 2px 3px 8px #6b716b;
   /* margin: 20px auto 0;*/
 }
 
@@ -80,6 +83,26 @@
   margin-right: 10px;
   border-radius: 30px;
 }
+.ToDoItem-Complete {
+  border: none;
+  width: 65px;
+  /* padding: 5px; */
+  height: 30px;
+  cursor: pointer;
+  background: #73ff73;
+  border-radius: 5px;
+  box-shadow: 1px 4px 7px #9cc19c;
+  color: white;
+  font-size: 11px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.ToDoItem-Complete:hover {
+  box-shadow: none;
+  margin-top: 1px;
+  margin-left: 1px;
+}
 
 .ToDoItem-Delete {
   border: none;
@@ -102,6 +125,7 @@
   margin-left: 1px;
 }
 input {
+  background: #e8e8e88a;
   font-size: 15px;
   width: 48%;
   margin-left: -270px;

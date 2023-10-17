@@ -66,7 +66,7 @@ function Todo() {
                   {item.text}
                 </p>
                 <button
-                  className="ToDoItem-Delete"
+                  className="ToDoItem-Complete"
                   onClick={() => Completed(item.id)}
                 >
                   completed
